@@ -19,4 +19,4 @@ export class AcademicLevel {
     this.deletedAt = academicLevels.deletedAt;
   }
 }
- 
+ //

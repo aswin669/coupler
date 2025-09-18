@@ -161,4 +161,4 @@ export const DeletAcademicLevelResponseSchema = {
   required: ['status', 'message', 'data'],
   description: 'Response schema for deleting a academic level',
 };
- 
+ //
