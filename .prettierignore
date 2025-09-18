@@ -1,0 +1,10 @@
+# Ignore all build output
+dist/
+build/
+
+# Ignore node_modules
+node_modules/
+.husky/
+
+# Ignore environment files
+.env.*

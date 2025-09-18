@@ -1,0 +1,53 @@
+{
+  "include": ["src", "tests"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@constants": ["src/constants"],
+      "@constants/*": ["src/constants/*"],
+      "@domain": ["src/domain"],
+      "@domain/*": ["src/domain/*"],
+      "@hooks": ["src/hooks"],
+      "@hooks/*": ["src/hooks/*"],
+      "@middlewares": ["src/middlewares"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@plugins": ["src/plugins"],
+      "@plugins/*": ["src/plugins/*"],
+      "@routes": ["src/routes"],
+      "@routes/*": ["src/routes/*"],
+      "@schemas": ["src/schemas"],
+      "@schemas/*": ["src/schemas/*"],
+      "@infrastructure": ["src/infrastructure"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+      "@types": ["src/types"],
+      "@types/*": ["src/types/*"],
+      "@utils": ["src/utils"],
+      "@utils/*": ["src/utils/*"],
+      "@root": ["src"],
+      "@root/*": ["src/*"]
+    },
+    "target": "esnext",
+    "lib": ["esnext"],
+    "module": "Node16",
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "types"],
+    "strict": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "moduleResolution": "Node16",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "removeComments": true,
+    "noStrictGenericChecks": false,
+    "skipLibCheck": true,
+    "allowJs": false, // Do not allow JavaScript files in TypeScript compilation
+    "noImplicitAny": true, // Disallow `any` types unless explicitly stated
+    "noUnusedLocals": true, // Warn about unused variables
+    "noUnusedParameters": true // Warn about unused function parameters
+    // "declaration": true,               // Generate declaration files (`.d.ts`)
+    // "declarationMap": true,            // Create source maps for declaration files
+  }
+}

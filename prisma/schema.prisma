@@ -1,0 +1,103 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["metrics", "postgresqlExtensions"]
+  binaryTargets   = ["native", "linux-musl-openssl-3.0.x"]
+  // output       = "../src/generated/prismaClient"
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ProfileStatus {
+  ACTIVE
+  UNDER_REVIEW
+  INCOMPLETE
+  INACTIVE
+  SUSPENDED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id                   String          @id @default(cuid())
+  email                String?         @unique
+  emailVerified        Boolean         @default(false) @map("email_verified")
+  fullName             String?         @map("full_name")
+  role                 Role
+  password             String?
+  mobileNumber         String?         @unique @map("mobile_number")
+  mobileNumberVerified Boolean         @default(false) @map("mobile_number_verified")
+  dob                  DateTime?       @db.Date
+  gender               String?
+  avatar               String?
+  profileStatus        ProfileStatus   @default(UNDER_REVIEW) @map("profile_status")
+  referralCode         String?         @unique @map("referral_code")
+  referredById         String?         @map("referred_by_id")
+  approvalStatus       ApprovalStatus? @default(PENDING) @map("approval_status")
+  approvedById         String?         @map("approved_by_id")
+  createdById          String?         @map("created_by_id")
+
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  approvedAt DateTime? @map("approved_at")
+  deletedAt  DateTime? @map("deleted_at")
+
+  referredBy    User?  @relation("referrals", fields: [referredById], references: [id])
+  referrals     User[] @relation("referrals")
+  approvedBy    User?  @relation("userApproval", fields: [approvedById], references: [id])
+  userApproval  User[] @relation("userApproval")
+  createdBy     User?  @relation("userCreatedBy", fields: [createdById], references: [id])
+  userCreatedBy User[] @relation("userCreatedBy")
+
+  @@index([role])
+  @@index([email])
+  @@index([gender])
+  @@index([createdAt])
+  @@index([mobileNumber])
+  @@map("users")
+}
+
+model Gender {
+  id        String    @id @default(cuid())
+  gender    String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+}
+
+model MaritalStatus {
+  id            String    @id @default(cuid())
+  maritalStatus String    @map("marital_status")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at")
+}
+
+model AgeGroup {
+  id        String    @id @default(cuid())
+  fromAge   Int       @map("from_age")
+  toAge     Int       @map("to_age")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+}
+
+model AcademicLevel {
+  id        String    @id @default(cuid())
+  academicLevel  String    @map("academic_Level")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+}
