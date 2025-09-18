@@ -23,3 +23,4 @@ export type academicLevelListInput = z.infer<typeof AcademicLevelListDto>;
 export const AcademicLevelIdParamDto = z.object({
   academicLevelId: z.string().cuid2(),
 });
+ 

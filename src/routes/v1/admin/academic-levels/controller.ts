@@ -122,3 +122,4 @@ const AcademicLevelRoutes: FastifyPluginAsync = async (fastify, _opts): Promise<
 };
 
 export default AcademicLevelRoutes;
+ 

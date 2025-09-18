@@ -25,3 +25,4 @@ export interface IAcademicLevelService {
 
   deleteAcademicLevel(id: string): Promise<void>;
 }
+ 
